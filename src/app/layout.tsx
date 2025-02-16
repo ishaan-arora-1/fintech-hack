@@ -1,6 +1,18 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { DM_Sans } from "next/font/google";
+import { Inter } from 'next/font/google'
+import { AnalysisProvider } from '@/context/AnalysisContext';
+
+
+const inter = Inter({ subsets: ['latin'] })
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-dm-sans",
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,16 +31,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={inter.className}>
+      <AnalysisProvider>
         {children}
-      </body>
+        </AnalysisProvider></body>
     </html>
-  );
+  )
 }
